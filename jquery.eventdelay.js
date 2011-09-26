@@ -5,20 +5,22 @@ $(function() {
         
         function start_delay () {
             _object = this;
-//          console.log ('Starting timeout');
             _counter = setTimeout(trigger, timeout);
         }
         
         function cancel_delay() {
-//          console.log ('Clearing timeout');
             clearTimeout(_counter);
         }
         
         function trigger () {
-//          console.log ('Triggering event');
             $(_object).trigger (event_trigger);
         }
         return this.live(event_start, start_delay).live(event_cancel, cancel_delay);
+	}
+	
+	$.fn.hoverdelay = function (delay, func) {
+	    this.live ('hoverdelay', func);
+	    return this.eventdelay ('mouseenter', 'hoverdelay', delay, 'mouseleave');
 	}
 	
 });
